@@ -167,6 +167,15 @@ All colors MUST be HSL. Environment-focused with authority and trust.
   .container-mobile {
     @apply px-4 sm:px-6 lg:px-8;
   }
+
+  /* PWA safe areas for mobile */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
   
   .grid-responsive {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;

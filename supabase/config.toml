@@ -1,0 +1,4 @@
+project_id = "kolmahpstqwrqrcljtsp"
+
+[functions.simulate-sensor-data]
+verify_jwt = false

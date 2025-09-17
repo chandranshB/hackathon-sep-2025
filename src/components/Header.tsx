@@ -1,12 +1,7 @@
-import { Shield, Eye, AlertTriangle, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { AlertTriangle, MapPin } from "lucide-react";
+import WeatherWidget from "./WeatherWidget";
 
-interface HeaderProps {
-  currentView: 'public' | 'government';
-  onViewChange: (view: 'public' | 'government') => void;
-}
-
-const Header = ({ currentView, onViewChange }: HeaderProps) => {
+const Header = () => {
   return (
     <header className="bg-card border-b shadow-sm sticky top-0 z-50">
       <div className="container-mobile mx-auto py-3 sm:py-4">
@@ -22,32 +17,10 @@ const Header = ({ currentView, onViewChange }: HeaderProps) => {
             </div>
           </div>
 
-          {/* Controls */}
+          {/* Weather & Location */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* View Toggle */}
-            <div className="flex bg-muted rounded-lg p-1">
-              <Button
-                variant={currentView === 'public' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => onViewChange('public')}
-                className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3"
-              >
-                <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm hidden sm:inline">Public</span>
-                <span className="text-xs sm:hidden">Pub</span>
-              </Button>
-              <Button
-                variant={currentView === 'government' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => onViewChange('government')}
-                className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-3"
-              >
-                <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="text-xs sm:text-sm hidden sm:inline">Government</span>
-                <span className="text-xs sm:hidden">Gov</span>
-              </Button>
-            </div>
-
+            <WeatherWidget />
+            
             {/* Location - Hidden on small screens */}
             <div className="hidden md:flex items-center space-x-2 text-sm">
               <MapPin className="h-4 w-4 text-muted-foreground" />

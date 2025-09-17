@@ -1,25 +1,24 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
 import { 
   AlertTriangle, 
   Camera, 
   TrendingUp, 
   Users, 
   FileText,
-  Shield,
   MapPin,
   Clock
 } from "lucide-react";
 import PollutionMap from "./PollutionMap";
-import ReportForm from "./ReportForm";
-import RouteNavigator from "./RouteNavigator";
 import AQITrendChart from "./AQITrendChart";
 
-const PublicDashboard = () => {
-  const [isReportFormOpen, setIsReportFormOpen] = useState(false);
-  const [isRouteNavigatorOpen, setIsRouteNavigatorOpen] = useState(false);
+interface PublicDashboardProps {
+  onStartReport?: () => void;
+  onPlanRoute?: () => void;
+}
+
+const PublicDashboard = ({ onStartReport, onPlanRoute }: PublicDashboardProps) => {
 
   return (
     <div className="space-y-4 sm:space-y-6 animate-fade-in">
@@ -46,7 +45,7 @@ const PublicDashboard = () => {
           <CardContent className="card-mobile">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-destructive/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-destructive" />
+                <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-destructive" />
               </div>
               <div className="min-w-0">
                 <p className="text-xl sm:text-2xl font-bold">847</p>
@@ -132,7 +131,7 @@ const PublicDashboard = () => {
             </div>
             <Button 
               className="w-full btn-mobile animate-scale-in"
-              onClick={() => setIsReportFormOpen(true)}
+              onClick={onStartReport}
             >
               <Camera className="h-4 w-4 mr-2" />
               Start Report
@@ -168,7 +167,7 @@ const PublicDashboard = () => {
             <Button 
               variant="outline" 
               className="w-full btn-mobile"
-              onClick={() => setIsRouteNavigatorOpen(true)}
+              onClick={onPlanRoute}
             >
               <MapPin className="h-4 w-4 mr-2" />
               Plan Clean Route
@@ -225,17 +224,6 @@ const PublicDashboard = () => {
         </CardContent>
       </Card>
 
-      {/* Report Form Modal */}
-      <ReportForm 
-        isOpen={isReportFormOpen} 
-        onClose={() => setIsReportFormOpen(false)} 
-      />
-
-      {/* Route Navigator Modal */}
-      <RouteNavigator
-        isOpen={isRouteNavigatorOpen}
-        onClose={() => setIsRouteNavigatorOpen(false)}
-      />
     </div>
   );
 };
