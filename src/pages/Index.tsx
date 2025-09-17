@@ -1,15 +1,32 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
-import EnhancedPollutionMap from "@/components/EnhancedPollutionMap";
+import SuperEnhancedPollutionMap from "@/components/SuperEnhancedPollutionMap";
 import ReportingSystem from "@/components/ReportingSystem";
 import RouteGenerator from "@/components/RouteGenerator";
 import NotificationCenter from "@/components/NotificationCenter";
+import RewardSystem from "@/components/RewardSystem";
+import Leaderboard from "@/components/Leaderboard";
+import EnhancedBottomNavigation from "@/components/EnhancedBottomNavigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Database, Users, Zap, MapPin, LogIn } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  Database, 
+  Users, 
+  Zap, 
+  MapPin, 
+  LogIn,
+  Trophy,
+  BarChart,
+  Camera,
+  Navigation,
+  Activity,
+  TrendingUp
+} from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 // Types
 export interface PollutionReport {
@@ -320,7 +337,7 @@ const Index = () => {
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
           {/* Map - Takes most space */}
           <div className="xl:col-span-3">
-            <EnhancedPollutionMap 
+            <SuperEnhancedPollutionMap 
               pollutionZones={pollutionZones}
               setPollutionZones={setPollutionZones}
               userLocation={userLocation}
@@ -347,9 +364,11 @@ const Index = () => {
           pollutionZones={pollutionZones}
           userLocation={userLocation}
         />
-      </div>
-    </div>
-  );
-};
-
-export default Index;
+        {/* Enhanced Bottom Navigation */}
+        <EnhancedBottomNavigation
+          onStartReport={() => setActiveTab('report')}
+          onPlanRoute={() => setActiveTab('route')}
+          onShowLeaderboard={() => navigate('/leaderboard')}
+          onShowStats={() => setActiveTab('stats')}
+          activeTab={activeTab}
+        />
