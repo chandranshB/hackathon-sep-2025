@@ -374,10 +374,10 @@ const RouteGenerator: React.FC<RouteGeneratorProps> = ({ pollutionZones, userLoc
   };
 
   const getRouteQualityColor = (score: number): string => {
-    if (score >= 80) return 'text-green-600 bg-green-50 border-green-200';
-    if (score >= 60) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-    if (score >= 40) return 'text-orange-600 bg-orange-50 border-orange-200';
-    return 'text-red-600 bg-red-50 border-red-200';
+    if (score >= 80) return 'text-success bg-alert-success border-success/50';
+    if (score >= 60) return 'text-warning bg-alert-warning border-warning/50';
+    if (score >= 40) return 'text-alert-error-foreground bg-alert-warning border-warning/50';
+    return 'text-alert-error-foreground bg-alert-error border-alert-error/50';
   };
 
   const getCurrentLocation = () => {
@@ -523,7 +523,7 @@ const RouteGenerator: React.FC<RouteGeneratorProps> = ({ pollutionZones, userLoc
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div className="flex justify-between">
                   <span>Max AQI:</span>
-                  <span className={`font-medium ${generatedRoute.maxAQI > routeRequest.maxPollution ? 'text-red-600' : 'text-green-600'}`}>
+                  <span className={`font-medium ${generatedRoute.maxAQI > routeRequest.maxPollution ? 'text-destructive' : 'text-success'}`}>
                     {generatedRoute.maxAQI}
                   </span>
                 </div>
@@ -547,14 +547,14 @@ const RouteGenerator: React.FC<RouteGeneratorProps> = ({ pollutionZones, userLoc
 
             {/* Warnings */}
             {generatedRoute.warnings.length > 0 && (
-              <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
+              <div className="bg-alert-warning border border-warning/50 p-3 rounded-lg">
                 <div className="flex items-center space-x-2 mb-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-600" />
-                  <span className="text-sm font-medium text-yellow-800">Route Advisories</span>
+                  <AlertTriangle className="h-4 w-4 text-alert-warning-foreground" />
+                  <span className="text-sm font-medium text-alert-warning-foreground">Route Advisories</span>
                 </div>
                 <div className="space-y-1">
                   {generatedRoute.warnings.map((warning, idx) => (
-                    <div key={idx} className="text-xs text-yellow-700 flex items-start">
+                    <div key={idx} className="text-xs text-alert-warning-foreground/80 flex items-start">
                       <span className="mr-2">•</span>
                       <span>{warning}</span>
                     </div>

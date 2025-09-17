@@ -57,18 +57,77 @@ Tamper-Resistant Enclosure Design:
 └── Backup battery with low-power mode
 ```
 
+#### Proximity & Motion Detection System:
+- **Ultrasonic sensors** (HC-SR04): Detect objects within 2-50cm range
+  - Cost: $3-5 per unit
+  - Prevents covering/blocking attempts
+  - 360° detection capability
+
+- **PIR motion sensors**: Detect movement near sensor housing
+  - Cost: $5-8 per unit
+  - Range: 3-7 meters
+  - Reduces false alarms vs continuous monitoring
+
+- **Accelerometer/Gyroscope** (MPU6050): Detects physical tampering
+  - Cost: $3-5 per unit
+  - Detects vibration, tilting, movement
+  - Sensitivity adjustable for wind conditions
+
+- **Magnetic field sensors**: Detect metal objects used to cover sensors
+  - Cost: $4-6 per unit
+  - Hall effect sensors detect metal proximity
+  - Immune to non-metallic tampering attempts
+
+- **Light sensors** (LDR/Photodiode): Detect if sensor is covered
+  - Cost: $1-2 per unit
+  - Backup detection method
+  - Ambient light correlation
+
+- **Sound detection** (Microphone + DSP): Detect drilling/cutting
+  - Cost: $8-12 per unit
+  - Machine learning audio classification
+  - Alerts for suspicious sounds
+
+#### Advanced Physical Security:
+- **Tamper-proof enclosures** with security screws and seals
+- **Vibration sensors** detect drilling, cutting, or impact attempts
+- **Multiple sensor redundancy** - if one sensor fails, others continue
+- **Secure mounting** at 3-4 meters height with anti-climb features
+- **Decoy sensors** to confuse potential tamperers
+- **Hidden backup sensors** in same area for validation
+
+#### Alert & Response System:
+- **Real-time alerts** to control center when tampering detected
+- **Backup power** (battery + solar) continues operation during power cuts
+- **Cellular/LoRaWAN connectivity** for immediate notification
+- **Photo capture** when tampering detected (if equipped with camera)
+- **GPS tracking** confirms sensor location hasn't changed
+- **Community reporting** system for observed tampering
+- **Emergency response** team dispatch for critical tampering events
+
 #### Software Security:
 - **Encrypted Communication**: TLS 1.3 for all data transmission
 - **Device Authentication**: Unique certificates per device
 - **Data Integrity**: Digital signatures and checksums
 - **Secure Boot**: Verified firmware loading only
 - **OTA Security**: Signed firmware updates only
+- **Blockchain logging** for immutable sensor data records
+
+#### Data Validation & Tampering Detection:
+- **Machine learning algorithms** identify unusual data patterns
+- **Cross-validation** between nearby sensors
+- **Historical data comparison** to detect anomalies
+- **Environmental correlation** (weather, traffic patterns)
+- **Statistical outlier detection** in real-time
+- **Behavioral analysis** of sensor performance over time
 
 #### Monitoring & Alerts:
-- Real-time tamper detection
-- Irregular data pattern analysis
-- Maintenance schedule tracking
+- Real-time tamper detection with immediate alerts
+- Irregular data pattern analysis using AI
+- Maintenance schedule tracking with photo documentation
 - Automated alerts for suspicious activity
+- **Insurance coverage** for damaged equipment
+- Regular security audits and penetration testing
 
 ### 4. Data Collection & Transmission
 
@@ -120,15 +179,16 @@ Data Collection Schedule:
 Per Monitoring Node:
 ├── Sensors: $70
 ├── Microcontroller: $12
+├── Anti-tampering system: $35
 ├── Enclosure & Installation: $50
 ├── Annual Maintenance: $25
-└── Total per node: ~$157 (first year)
+└── Total per node: ~$192 (first year)
 
 For 50-node network in Dehradun:
-├── Initial Setup: $7,850
+├── Initial Setup: $9,600
 ├── Annual Operating: $1,250
-├── 5-year Total: $12,850
-└── Cost per data point: <$0.001
+├── 5-year Total: $14,850
+└── Cost per data point: <$0.0012
 ```
 
 ## Integration with Clear Air Platform

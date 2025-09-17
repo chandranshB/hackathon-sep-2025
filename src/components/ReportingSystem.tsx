@@ -232,10 +232,10 @@ const ReportingSystem: React.FC<ReportingSystemProps> = ({ onNewReport, userLoca
 
   const getSeverityColor = (severity: string) => {
     const colors = {
-      low: 'bg-green-100 text-green-800 border-green-200',
-      medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-      high: 'bg-orange-100 text-orange-800 border-orange-200',
-      critical: 'bg-red-100 text-red-800 border-red-200'
+      low: 'bg-alert-success text-alert-success-foreground border-success/50',
+      medium: 'bg-alert-warning text-alert-warning-foreground border-warning/50',
+      high: 'bg-alert-info text-alert-info-foreground border-alert-info/50',
+      critical: 'bg-alert-error text-alert-error-foreground border-alert-error/50'
     };
     return colors[severity as keyof typeof colors] || colors.medium;
   };
@@ -269,7 +269,7 @@ const ReportingSystem: React.FC<ReportingSystemProps> = ({ onNewReport, userLoca
             {lastAnalysis && (
               <div className="bg-muted/30 p-3 rounded-lg">
                 <div className="text-sm font-medium mb-2 flex items-center space-x-1">
-                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <CheckCircle className="h-4 w-4 text-success" />
                   <span>Last Analysis Results</span>
                 </div>
                 <div className="space-y-2 text-xs">
@@ -340,7 +340,7 @@ const ReportingSystem: React.FC<ReportingSystemProps> = ({ onNewReport, userLoca
                       {!isAnalyzing && (
                         <button
                           onClick={() => removeImage(index)}
-                          className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                           <X className="h-3 w-3" />
                         </button>
@@ -444,8 +444,8 @@ const ReportingSystem: React.FC<ReportingSystemProps> = ({ onNewReport, userLoca
 
             {/* File Info */}
             {reportForm.images.length > 0 && !isAnalyzing && (
-              <div className="bg-green-50 p-2 rounded border border-green-200">
-                <div className="text-xs text-green-700 flex items-center space-x-1">
+              <div className="bg-alert-success p-2 rounded border border-success/50">
+                <div className="text-xs text-alert-success-foreground flex items-center space-x-1">
                   <CheckCircle className="h-3 w-3" />
                   <span>{reportForm.images.length} file(s) ready for AI analysis</span>
                 </div>

@@ -74,6 +74,16 @@ export default {
 					alert: 'hsl(var(--gov-alert))',
 					success: 'hsl(var(--gov-success))'
 				},
+				alert: {
+					info: 'hsl(var(--alert-info))',
+					'info-foreground': 'hsl(var(--alert-info-foreground))',
+					warning: 'hsl(var(--alert-warning))',
+					'warning-foreground': 'hsl(var(--alert-warning-foreground))',
+					error: 'hsl(var(--alert-error))',
+					'error-foreground': 'hsl(var(--alert-error-foreground))',
+					success: 'hsl(var(--alert-success))',
+					'success-foreground': 'hsl(var(--alert-success-foreground))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

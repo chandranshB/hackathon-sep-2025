@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Wind, MapPin, Activity, Settings, Menu, X, User, LogOut } from "lucide-react";
+import { Wind, MapPin, Activity, Settings, Menu, X, User, LogOut, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { 
@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@/providers/theme-provider";
 import WeatherWidget from "./WeatherWidget";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut, isAuthenticated } = useAuth();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -36,6 +38,18 @@ const Header = () => {
           {/* Weather & Actions */}
           <div className="flex items-center space-x-2 sm:space-x-4">
             <WeatherWidget />
+            
+            {/* Theme Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className="hover-scale"
+            >
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
             
             {/* Location - Hidden on small screens */}
             <div className="hidden md:flex items-center space-x-2 text-sm">

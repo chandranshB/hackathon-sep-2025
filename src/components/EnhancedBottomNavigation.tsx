@@ -118,7 +118,7 @@ const EnhancedBottomNavigation = ({
                 variant="outline"
                 className="flex-col h-16 hover-scale"
                 onClick={() => {
-                  // Handle quick complaint
+                  onStartReport();
                   setShowReportOptions(false);
                 }}
               >
@@ -131,7 +131,7 @@ const EnhancedBottomNavigation = ({
       )}
 
       {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-md border-t shadow-lg z-50 md:hidden safe-area-bottom">
+      <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-md border-t shadow-lg z-[100] md:hidden safe-area-bottom">
         <div className="grid grid-cols-5 gap-1 p-2">
           {navItems.map((item) => {
             const Icon = item.icon;

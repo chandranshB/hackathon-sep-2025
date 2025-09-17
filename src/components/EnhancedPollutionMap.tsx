@@ -245,7 +245,7 @@ const EnhancedPollutionMap: React.FC<EnhancedPollutionMapProps> = ({
     const userMarker = L.marker(userLocation, {
       icon: L.divIcon({
         className: 'user-location-marker',
-        html: '<div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg animate-pulse"></div>',
+        html: '<div class="w-4 h-4 bg-primary rounded-full border-2 border-white shadow-lg animate-pulse"></div>',
         iconSize: [16, 16],
         iconAnchor: [8, 8]
       })
@@ -306,7 +306,7 @@ const EnhancedPollutionMap: React.FC<EnhancedPollutionMapProps> = ({
         <div style="max-width: 300px; font-size: 13px;">
           <div class="flex items-center justify-between mb-2">
             <h3 style="font-weight: bold; color: #1f2937; margin: 0;">${zone.name}</h3>
-            ${isRecent ? '<div class="w-2 h-2 bg-green-500 rounded-full animate-pulse" title="Live data"></div>' : ''}
+            ${isRecent ? '<div class="w-2 h-2 bg-success rounded-full animate-pulse" title="Live data"></div>' : ''}
           </div>
           
           <div style="margin-bottom: 12px;">
@@ -443,7 +443,7 @@ const EnhancedPollutionMap: React.FC<EnhancedPollutionMapProps> = ({
                 {/* AI Forecast */}
                 <div className="bg-muted/30 p-3 rounded-lg">
                   <h4 className="font-medium text-sm mb-2 flex items-center space-x-1">
-                    <Zap className="h-4 w-4 text-yellow-500" />
+                    <Zap className="h-4 w-4 text-warning" />
                     <span>AI Forecast</span>
                   </h4>
                   <div className="space-y-2">
@@ -552,7 +552,7 @@ const EnhancedPollutionMap: React.FC<EnhancedPollutionMapProps> = ({
                               </span>
                             </div>
                             <div className="flex items-center space-x-1">
-                              {report.verified && <CheckCircle className="h-3 w-3 text-green-500" />}
+                              {report.verified && <CheckCircle className="h-3 w-3 text-success" />}
                               <span className="text-muted-foreground">
                                 {new Date(report.timestamp).toLocaleTimeString()}
                               </span>

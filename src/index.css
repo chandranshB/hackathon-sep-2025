@@ -52,6 +52,16 @@ All colors MUST be HSL. Environment-focused with authority and trust.
     --warning: 45 93% 47%;
     --warning-foreground: 220 26% 14%;
 
+    /* Alert System Colors */
+    --alert-info: 219 43% 94%;
+    --alert-info-foreground: 219 43% 24%;
+    --alert-warning: 45 93% 94%;
+    --alert-warning-foreground: 45 93% 30%;
+    --alert-error: 0 84% 94%;
+    --alert-error-foreground: 0 84% 30%;
+    --alert-success: 120 61% 94%;
+    --alert-success-foreground: 120 61% 20%;
+
     /* UI Elements */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
@@ -121,8 +131,11 @@ All colors MUST be HSL. Environment-focused with authority and trust.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    /* Dark mode authority colors */
+    --primary: 219 43% 75%;
     --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-hover: 219 43% 85%;
+    --primary-glow: 219 43% 60%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -133,12 +146,30 @@ All colors MUST be HSL. Environment-focused with authority and trust.
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    /* Dark mode semantic colors */
+    --success: 120 61% 50%;
+    --success-foreground: 222.2 47.4% 11.2%;
+    
+    --warning: 45 93% 60%;
+    --warning-foreground: 222.2 47.4% 11.2%;
+    
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
+
+    /* Dark mode alert colors */
+    --alert-info: 219 43% 40%;
+    --alert-info-foreground: 210 40% 98%;
+    --alert-warning: 45 93% 47%;
+    --alert-warning-foreground: 222.2 47.4% 11.2%;
+    --alert-error: 0 84% 60%;
+    --alert-error-foreground: 210 40% 98%;
+    --alert-success: 120 61% 34%;
+    --alert-success-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

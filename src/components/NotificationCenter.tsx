@@ -142,10 +142,10 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
   const getSeverityColor = (severity: Alert['severity']) => {
     const colors = {
-      low: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-      medium: 'bg-orange-100 text-orange-800 border-orange-200',
-      high: 'bg-red-100 text-red-800 border-red-200',
-      critical: 'bg-purple-100 text-purple-800 border-purple-200'
+      low: 'bg-alert-warning text-alert-warning-foreground border-alert-warning/50',
+      medium: 'bg-alert-info text-alert-info-foreground border-alert-info/50',
+      high: 'bg-alert-error text-alert-error-foreground border-alert-error/50',
+      critical: 'bg-destructive text-destructive-foreground border-destructive/50'
     };
     return colors[severity];
   };
@@ -322,14 +322,14 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
         {/* Critical Alerts Summary */}
         {criticalAlerts.length > 0 && (
-          <div className="bg-red-50 border border-red-200 p-3 rounded-lg">
+          <div className="bg-alert-error border border-alert-error/50 p-3 rounded-lg">
             <div className="flex items-center space-x-2 mb-2">
-              <AlertTriangle className="h-4 w-4 text-red-600" />
-              <span className="text-sm font-medium text-red-800">
+              <AlertTriangle className="h-4 w-4 text-alert-error-foreground" />
+              <span className="text-sm font-medium text-alert-error-foreground">
                 {criticalAlerts.length} Critical Alert{criticalAlerts.length > 1 ? 's' : ''}
               </span>
             </div>
-            <div className="text-xs text-red-700">
+            <div className="text-xs text-alert-error-foreground/80">
               Immediate attention required for high pollution levels
             </div>
           </div>
@@ -445,7 +445,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
           <div className="inline-flex items-center space-x-2 text-xs text-muted-foreground">
             {settings.enabled ? (
               <>
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
                 <span>Live monitoring active</span>
               </>
             ) : (

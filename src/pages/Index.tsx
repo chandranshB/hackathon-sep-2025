@@ -89,6 +89,7 @@ export interface PollutionZone {
 const Index = () => {
   const { isAuthenticated, loading } = useAuth();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('map');
   
   // Global state for the entire app
   const [pollutionZones, setPollutionZones] = useState<PollutionZone[]>([
@@ -273,10 +274,10 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5 transition-colors duration-300">
       <Header />
       
-      <div className="container mx-auto px-4 py-6 space-y-6">
+      <main className="container mx-auto px-4 py-6 space-y-6 pb-20">
         {/* Authentication Banner */}
         {!isAuthenticated && (
           <Card className="bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/20 animate-fade-in">
@@ -333,42 +334,140 @@ const Index = () => {
           </CardContent>
         </Card>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-          {/* Map - Takes most space */}
-          <div className="xl:col-span-3">
-            <SuperEnhancedPollutionMap 
-              pollutionZones={pollutionZones}
-              setPollutionZones={setPollutionZones}
-              userLocation={userLocation}
-            />
-          </div>
+        {/* Main Content Tabs - Desktop Only */}
+        <div className="hidden md:block">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 mb-6">
+              <TabsTrigger value="map" className="flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                <span>Map</span>
+              </TabsTrigger>
+              <TabsTrigger value="report" className="flex items-center gap-2">
+                <Camera className="h-4 w-4" />
+                <span>Report</span>
+              </TabsTrigger>
+              <TabsTrigger value="route" className="flex items-center gap-2">
+                <Navigation className="h-4 w-4" />
+                <span>Routes</span>
+              </TabsTrigger>
+              <TabsTrigger value="stats" className="flex items-center gap-2 hidden lg:flex">
+                <BarChart className="h-4 w-4" />
+                <span>Stats</span>
+              </TabsTrigger>
+              <TabsTrigger value="leaderboard" className="flex items-center gap-2 hidden lg:flex">
+                <Trophy className="h-4 w-4" />
+                <span>Leaderboard</span>
+              </TabsTrigger>
+              <TabsTrigger value="rewards" className="flex items-center gap-2 hidden lg:flex">
+                <TrendingUp className="h-4 w-4" />
+                <span>Rewards</span>
+              </TabsTrigger>
+            </TabsList>
 
-          {/* Side Panel */}
-          <div className="xl:col-span-1 space-y-6">
-            <NotificationCenter 
-              notifications={notifications}
-              setNotifications={setNotifications}
-              pollutionZones={pollutionZones}
-            />
-            
-            <ReportingSystem 
-              onNewReport={handleNewReport}
-              userLocation={userLocation}
-            />
-          </div>
+            <TabsContent value="map" className="space-y-6">
+              <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+                {/* Map - Takes most space */}
+                <div className="xl:col-span-3">
+                  <SuperEnhancedPollutionMap 
+                    pollutionZones={pollutionZones}
+                    setPollutionZones={setPollutionZones}
+                    userLocation={userLocation}
+                  />
+                </div>
+
+                {/* Side Panel */}
+                <div className="xl:col-span-1 space-y-4">
+                  <NotificationCenter 
+                    notifications={notifications}
+                    setNotifications={setNotifications}
+                    pollutionZones={pollutionZones}
+                  />
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="report" className="space-y-6">
+              <ReportingSystem 
+                onNewReport={handleNewReport}
+                userLocation={userLocation}
+              />
+            </TabsContent>
+
+            <TabsContent value="route" className="space-y-6">
+              <RouteGenerator 
+                pollutionZones={pollutionZones}
+                userLocation={userLocation}
+              />
+            </TabsContent>
+
+            <TabsContent value="stats" className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="hover-scale">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold mb-4">Pollution Trends</h3>
+                    <div className="space-y-3">
+                      {pollutionZones.map(zone => (
+                        <div key={zone.id} className="flex justify-between items-center">
+                          <span className="text-sm text-muted-foreground">{zone.name}</span>
+                          <div className="flex items-center gap-2">
+                            <Badge variant={zone.level === 'good' ? 'default' : 'destructive'}>
+                              {zone.aqi}
+                            </Badge>
+                            <div className={`text-xs ${zone.forecast.trend === 'improving' ? 'text-success' : 'text-destructive'}`}>
+                              {zone.forecast.trend === 'improving' ? '↓' : zone.forecast.trend === 'worsening' ? '↑' : '→'}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover-scale">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-semibold mb-4">System Health</h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Active Sensors</span>
+                        <Badge variant="default">{liveZones}/4</Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Reports Today</span>
+                        <Badge variant="default">{totalReports}</Badge>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Coverage Area</span>
+                        <Badge variant="default">Dehradun</Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="leaderboard" className="space-y-6">
+              <Leaderboard />
+            </TabsContent>
+
+            <TabsContent value="rewards" className="space-y-6">
+              <RewardSystem />
+            </TabsContent>
+          </Tabs>
         </div>
 
-        {/* Route Generator */}
-        <RouteGenerator 
-          pollutionZones={pollutionZones}
-          userLocation={userLocation}
-        />
-        {/* Enhanced Bottom Navigation */}
-        <EnhancedBottomNavigation
-          onStartReport={() => setActiveTab('report')}
-          onPlanRoute={() => setActiveTab('route')}
-          onShowLeaderboard={() => navigate('/leaderboard')}
-          onShowStats={() => setActiveTab('stats')}
-          activeTab={activeTab}
-        />
+        {/* Mobile Bottom Navigation - Only visible on mobile */}
+        <div className="fixed bottom-0 left-0 right-0 lg:hidden">
+          <EnhancedBottomNavigation
+            onStartReport={() => setActiveTab('report')}
+            onPlanRoute={() => setActiveTab('route')}
+            onShowLeaderboard={() => setActiveTab('leaderboard')}
+            onShowStats={() => setActiveTab('stats')}
+            activeTab={activeTab}
+          />
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Index;

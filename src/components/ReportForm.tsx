@@ -35,10 +35,10 @@ interface ReportFormProps {
 }
 
 const pollutionTypes = [
-  { id: 'vehicle', name: 'Vehicle Emissions', icon: Car, color: 'bg-blue-500' },
-  { id: 'industrial', name: 'Industrial Pollution', icon: Factory, color: 'bg-red-500' },
-  { id: 'construction', name: 'Construction Dust', icon: Hammer, color: 'bg-yellow-500' },
-  { id: 'burning', name: 'Waste/Open Burning', icon: Flame, color: 'bg-orange-500' }
+  { id: 'vehicle', name: 'Vehicle Emissions', icon: Car, color: 'bg-primary' },
+  { id: 'industrial', name: 'Industrial Pollution', icon: Factory, color: 'bg-destructive' },
+  { id: 'construction', name: 'Construction Dust', icon: Hammer, color: 'bg-warning' },
+  { id: 'burning', name: 'Waste/Open Burning', icon: Flame, color: 'bg-alert-error' }
 ];
 
 // Convert image to WebP format for efficient storage

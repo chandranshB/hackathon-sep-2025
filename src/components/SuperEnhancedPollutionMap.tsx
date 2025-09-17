@@ -196,11 +196,12 @@ const SuperEnhancedPollutionMap = ({
       }));
       
       // Update pollution zones with new data
-      setPollutionZones(zones => zones.map((zone: PollutionZone) => ({
+      const updatedZones = pollutionZones.map(zone => ({
         ...zone,
         aqi: Math.max(10, zone.aqi + (Math.random() - 0.5) * 20),
         lastUpdated: new Date().toISOString()
-      })));
+      }));
+      setPollutionZones(updatedZones);
       
       setIsLoading(false);
     }, 1500);
@@ -347,8 +348,10 @@ const SuperEnhancedPollutionMap = ({
           ))}
         </MapContainer>
 
-        {/* Map Overlays */}
-        <WeatherOverlay weather={weatherData} />
+        {/* Map Overlays - Only show on desktop */}
+        <div className="hidden md:block">
+          <WeatherOverlay weather={weatherData} />
+        </div>
         <MapControls 
           onRefresh={handleRefresh}
           showHeatmap={showHeatmap}
@@ -356,18 +359,18 @@ const SuperEnhancedPollutionMap = ({
           isLoading={isLoading}
         />
         
-        {/* Legend */}
-        <Card className="absolute bottom-4 left-4 z-[1000] bg-card/90 backdrop-blur-sm">
+        {/* Legend - Hidden on mobile */}
+        <Card className="absolute bottom-4 left-4 z-[1000] bg-card/90 backdrop-blur-sm hidden md:block">
           <CardContent className="p-3">
             <div className="text-xs font-semibold mb-2">Air Quality Index</div>
             <div className="space-y-1">
               {[
-                { range: '0-50', level: 'Good', color: '#22c55e' },
-                { range: '51-100', level: 'Satisfactory', color: '#84cc16' },
-                { range: '101-150', level: 'Moderate', color: '#eab308' },
-                { range: '151-200', level: 'Poor', color: '#f97316' },
-                { range: '201-300', level: 'Very Poor', color: '#ef4444' },
-                { range: '300+', level: 'Severe', color: '#a855f7' }
+                { range: '0-50', level: 'Good', color: 'hsl(var(--air-excellent))' },
+                { range: '51-100', level: 'Satisfactory', color: 'hsl(var(--air-good))' },
+                { range: '101-150', level: 'Moderate', color: 'hsl(var(--air-moderate))' },
+                { range: '151-200', level: 'Poor', color: 'hsl(var(--air-poor))' },
+                { range: '201-300', level: 'Very Poor', color: 'hsl(var(--air-severe))' },
+                { range: '300+', level: 'Severe', color: 'hsl(var(--air-hazardous))' }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center space-x-2 text-xs">
                   <div 
