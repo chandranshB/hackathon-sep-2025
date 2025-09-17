@@ -2,7 +2,7 @@
   "name": "AirWatch - Pollution Accountability System",
   "short_name": "AirWatch",
   "description": "Real-time pollution monitoring and accountability system for citizens and government",
-  "theme_color": "#2c5f2f",
+  "theme_color": "#1e3a8a",
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",

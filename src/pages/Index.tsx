@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import EnhancedPollutionMap from "@/components/EnhancedPollutionMap";
 import ReportingSystem from "@/components/ReportingSystem";
@@ -6,7 +7,9 @@ import RouteGenerator from "@/components/RouteGenerator";
 import NotificationCenter from "@/components/NotificationCenter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Database, Users, Zap, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Database, Users, Zap, MapPin, LogIn } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 // Types
 export interface PollutionReport {
@@ -67,6 +70,9 @@ export interface PollutionZone {
 }
 
 const Index = () => {
+  const { isAuthenticated, loading } = useAuth();
+  const navigate = useNavigate();
+  
   // Global state for the entire app
   const [pollutionZones, setPollutionZones] = useState<PollutionZone[]>([
     {
@@ -236,13 +242,46 @@ const Index = () => {
     Date.now() - new Date(zone.lastUpdated).getTime() < 300000 // Updated in last 5 minutes
   ).length;
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5 flex items-center justify-center">
+        <div className="text-center space-y-4 animate-fade-in">
+          <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary rounded-full animate-pulse" />
+          </div>
+          <p className="text-muted-foreground">Loading AirWatch...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       <Header />
       
       <div className="container mx-auto px-4 py-6 space-y-6">
+        {/* Authentication Banner */}
+        {!isAuthenticated && (
+          <Card className="bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/20 animate-fade-in">
+            <CardContent className="py-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold text-lg">Join AirWatch Community</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Sign in to save locations, get personalized alerts, and contribute to air quality monitoring.
+                  </p>
+                </div>
+                <Button onClick={() => navigate('/auth')} className="hover-scale">
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Sign In
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* System Overview */}
-        <Card>
+        <Card className="hover-scale smooth-transition">
           <CardContent className="py-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>

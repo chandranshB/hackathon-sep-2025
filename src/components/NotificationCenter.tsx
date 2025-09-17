@@ -189,7 +189,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
     
     // In a real app, this would trigger enforcement actions
     console.log(`Taking action on alert: ${alert.message}`);
-    alert(`Action taken for ${alert.zoneName}: Enforcement team notified`);
+    window.alert(`Action taken for ${alert.zoneName}: Enforcement team notified`);
   };
 
   const clearAllAlerts = () => {

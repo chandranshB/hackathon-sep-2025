@@ -14,6 +14,224 @@ export type Database = {
   }
   public: {
     Tables: {
+      citizen_reports: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          description: string
+          fine_amount: number | null
+          id: string
+          investigation_notes: string | null
+          latitude: number
+          location: unknown
+          location_name: string | null
+          longitude: number
+          photo_urls: string[] | null
+          priority: string
+          resolved_at: string | null
+          status: string
+          title: string
+          updated_at: string
+          user_id: string | null
+          violation_type: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          description: string
+          fine_amount?: number | null
+          id?: string
+          investigation_notes?: string | null
+          latitude: number
+          location: unknown
+          location_name?: string | null
+          longitude: number
+          photo_urls?: string[] | null
+          priority?: string
+          resolved_at?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          user_id?: string | null
+          violation_type: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string
+          fine_amount?: number | null
+          id?: string
+          investigation_notes?: string | null
+          latitude?: number
+          location?: unknown
+          location_name?: string | null
+          longitude?: number
+          photo_urls?: string[] | null
+          priority?: string
+          resolved_at?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string | null
+          violation_type?: string
+        }
+        Relationships: []
+      }
+      enforcement_actions: {
+        Row: {
+          action_taken: string
+          company_name: string | null
+          created_at: string
+          evidence_urls: string[] | null
+          fine_amount: number
+          id: string
+          latitude: number
+          location: string
+          longitude: number
+          officer_name: string | null
+          report_id: string | null
+          status: string
+          updated_at: string
+          vehicle_number: string | null
+          violation_type: string
+        }
+        Insert: {
+          action_taken: string
+          company_name?: string | null
+          created_at?: string
+          evidence_urls?: string[] | null
+          fine_amount: number
+          id?: string
+          latitude: number
+          location: string
+          longitude: number
+          officer_name?: string | null
+          report_id?: string | null
+          status?: string
+          updated_at?: string
+          vehicle_number?: string | null
+          violation_type: string
+        }
+        Update: {
+          action_taken?: string
+          company_name?: string | null
+          created_at?: string
+          evidence_urls?: string[] | null
+          fine_amount?: number
+          id?: string
+          latitude?: number
+          location?: string
+          longitude?: number
+          officer_name?: string | null
+          report_id?: string | null
+          status?: string
+          updated_at?: string
+          vehicle_number?: string | null
+          violation_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enforcement_actions_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "citizen_reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enhanced_pollution_zones: {
+        Row: {
+          coordinates: unknown
+          created_at: string | null
+          current_aqi: number | null
+          forecast: Json | null
+          heatmap_intensity: number | null
+          id: string
+          last_updated: string | null
+          latitude: number
+          level: string | null
+          longitude: number
+          name: string
+          reports_count: number | null
+          spread_radius: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          coordinates: unknown
+          created_at?: string | null
+          current_aqi?: number | null
+          forecast?: Json | null
+          heatmap_intensity?: number | null
+          id?: string
+          last_updated?: string | null
+          latitude: number
+          level?: string | null
+          longitude: number
+          name: string
+          reports_count?: number | null
+          spread_radius?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          coordinates?: unknown
+          created_at?: string | null
+          current_aqi?: number | null
+          forecast?: Json | null
+          heatmap_intensity?: number | null
+          id?: string
+          last_updated?: string | null
+          latitude?: number
+          level?: string | null
+          longitude?: number
+          name?: string
+          reports_count?: number | null
+          spread_radius?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      notification_logs: {
+        Row: {
+          channel: string
+          created_at: string
+          error_message: string | null
+          id: string
+          message: string
+          recipient: string
+          sent_at: string | null
+          status: string
+          subject: string | null
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          channel: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          message: string
+          recipient: string
+          sent_at?: string | null
+          status?: string
+          subject?: string | null
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          message?: string
+          recipient?: string
+          sent_at?: string | null
+          status?: string
+          subject?: string | null
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       pollution_alerts: {
         Row: {
           acknowledged_at: string | null
@@ -154,6 +372,57 @@ export type Database = {
         }
         Relationships: []
       }
+      pollution_reports: {
+        Row: {
+          ai_analysis: Json | null
+          coordinates: unknown
+          created_at: string | null
+          description: string | null
+          id: string
+          images: string[] | null
+          latitude: number
+          longitude: number
+          timestamp: string | null
+          traffic_context: Json | null
+          updated_at: string | null
+          user_id: string | null
+          verified: boolean | null
+          weather_context: Json | null
+        }
+        Insert: {
+          ai_analysis?: Json | null
+          coordinates: unknown
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          latitude: number
+          longitude: number
+          timestamp?: string | null
+          traffic_context?: Json | null
+          updated_at?: string | null
+          user_id?: string | null
+          verified?: boolean | null
+          weather_context?: Json | null
+        }
+        Update: {
+          ai_analysis?: Json | null
+          coordinates?: unknown
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          latitude?: number
+          longitude?: number
+          timestamp?: string | null
+          traffic_context?: Json | null
+          updated_at?: string | null
+          user_id?: string | null
+          verified?: boolean | null
+          weather_context?: Json | null
+        }
+        Relationships: []
+      }
       pollution_zones: {
         Row: {
           aqi_critical_threshold: number | null
@@ -193,6 +462,123 @@ export type Database = {
           sensitive_receptors?: string[] | null
           updated_at?: string
           zone_type?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          location_lat: number | null
+          location_lng: number | null
+          location_name: string | null
+          notification_preferences: Json | null
+          phone_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id: string
+          location_lat?: number | null
+          location_lng?: number | null
+          location_name?: string | null
+          notification_preferences?: Json | null
+          phone_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          location_lat?: number | null
+          location_lng?: number | null
+          location_name?: string | null
+          notification_preferences?: Json | null
+          phone_number?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      route_cache: {
+        Row: {
+          activity_type: string
+          clean_air_score: number | null
+          created_at: string | null
+          distance: number
+          id: string
+          route_points: Json
+          start_latitude: number
+          start_location: unknown
+          start_longitude: number
+          updated_at: string | null
+        }
+        Insert: {
+          activity_type: string
+          clean_air_score?: number | null
+          created_at?: string | null
+          distance: number
+          id?: string
+          route_points: Json
+          start_latitude: number
+          start_location: unknown
+          start_longitude: number
+          updated_at?: string | null
+        }
+        Update: {
+          activity_type?: string
+          clean_air_score?: number | null
+          created_at?: string | null
+          distance?: number
+          id?: string
+          route_points?: Json
+          start_latitude?: number
+          start_location?: unknown
+          start_longitude?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          created_at: string | null
+          id: string
+          latitude: number | null
+          location: unknown | null
+          longitude: number | null
+          max_aqi_tolerance: number | null
+          notification_radius: number | null
+          notification_settings: Json | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          latitude?: number | null
+          location?: unknown | null
+          longitude?: number | null
+          max_aqi_tolerance?: number | null
+          notification_radius?: number | null
+          notification_settings?: Json | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          latitude?: number | null
+          location?: unknown | null
+          longitude?: number | null
+          max_aqi_tolerance?: number | null
+          notification_radius?: number | null
+          notification_settings?: Json | null
+          updated_at?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
